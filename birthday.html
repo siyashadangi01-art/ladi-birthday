@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ladi… do you love me? 💖</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    margin-top: 80px;
+    font-size: 55px;
+    transition: 0.5s;
+    text-shadow: 0 0 25px rgba(255,255,255,0.6);
+}
+
+#card {
+    display: none;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 25px;
+    width: 80%;
+    max-width: 750px;
+    margin: 30px auto;
+    font-size: 22px;
+    line-height: 1.7;
+    animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    margin: 15px;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: white;
+    color: #ff4d6d;
+    font-weight: bold;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    background: #333;
+    color: white;
+    position: relative;
+}
+
+/* Ending screen */
+#ending {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ff4d6d, #ff758f);
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: endingFade 1.5s ease forwards;
+}
+
+@keyframes endingFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="mainHeading">Ladi… do you love me? 🥺💖</h1>
+
+<div id="card"></div>
+
+<button id="yesBtn">YES 💕</button>
+<button id="noBtn">NO 😒</button>
+
+<div id="ending">
+    HAPPY BIRTHDAY LADIIII 🎉💖 <br><br>
+    You are stuck with me forever 😌
+</div>
+
+<script>
+
+let song = new Audio("happy.mp3");
+
+let yesBtn = document.getElementById("yesBtn");
+let noBtn = document.getElementById("noBtn");
+let heading = document.getElementById("mainHeading");
+let card = document.getElementById("card");
+let ending = document.getElementById("ending");
+
+yesBtn.addEventListener("click", function() {
+
+    heading.innerHTML = "I KNEW IT 😌💖";
+
+    card.style.display = "block";
+    card.innerHTML =
+    "Ladoo… 🖤<br><br>" +
+    "Thank you for choosing me every single time.<br><br>" +
+    "You are my safe place, my chaos partner, my late night overthinking companion.<br><br>" +
+    "You are like tea to me, I might have coffee sometimes, but I will always be addicted to tea. And you are my tea. ☕💗<br><br>" +
+    "Happy Birthday my forever person. I love you endlessly. 💕";
+
+    song.currentTime = 0;
+    song.play();
+
+    launchConfetti();
+
+    // Dramatic ending after 6 seconds
+    setTimeout(() => {
+        ending.style.display = "flex";
+    }, 6000);
+});
+
+noBtn.addEventListener("mouseover", function() {
+    heading.innerHTML = "Liar 😏💔";
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 50);
+    this.style.position = "absolute";
+    this.style.left = x + "px";
+    this.style.top = y + "px";
+});
+
+// Strong confetti
+function launchConfetti() {
+    for (let i = 0; i < 200; i++) {
+        let conf = document.createElement("div");
+        conf.style.position = "fixed";
+        conf.style.width = "8px";
+        conf.style.height = "8px";
+        conf.style.backgroundColor =
+            "hsl(" + Math.random()*360 + ",100%,50%)";
+        conf.style.left = Math.random()*window.innerWidth + "px";
+        conf.style.top = "-10px";
+        conf.style.transition = "top 4s linear";
+        document.body.appendChild(conf);
+
+        setTimeout(() => {
+            conf.style.top = window.innerHeight + "px";
+        }, 10);
+
+        setTimeout(() => conf.remove(), 4000);
+    }
+}
+
+</script>
+
+</body>
+</html>
